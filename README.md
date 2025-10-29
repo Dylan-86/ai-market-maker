@@ -22,8 +22,8 @@ Follow these instructions to get the project running on your local machine.
 First, clone this project to your local machine using Git:
 
 ```bash
-git clone <your-repository-url>
-cd <your-repository-directory>
+git clone https://github.com/Dylan-86/ai-market-maker
+cd ai-market-maker
 ```
 
 ### 3. Create a Python Virtual Environment
