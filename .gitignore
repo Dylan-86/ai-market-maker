@@ -1,0 +1,17 @@
+*.pyc
+*.pyo
+*.egg
+*.egg-info
+dist/
+build/
+__pycache__/
+.venv/
+venv/
+env/
+*.swp
+*.swo
+*.log
+.DS_Store
+*.orig
+secrets.txt
+.env
