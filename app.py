@@ -47,30 +47,47 @@ def generate_market():
         )
         generated_text = resp.text or ""
 
-        description = "Parsing failed: Description not found."
+        # Initialize all fields to "Parsing failed"
+        title = "Parsing failed: Title not found."
+        underlying_metric = "Parsing failed: Underlying metric not found."
         url = "Parsing failed: URL not found."
+        description = "Parsing failed: Description not found."
+        score = "Parsing failed: Score not found."
+        reason = "Parsing failed: Reason not found."
 
-        summary_line = ""
-        for line in generated_text.splitlines():
-            if "Market title:" in line and "Market description:" in line:
-                summary_line = line.strip().replace("`", "")
-                break
+        # Regular expressions to extract data from the generated text
+        title_match = re.search(r"<title>(.*?)</title>", generated_text, re.DOTALL)
+        if title_match:
+            title = title_match.group(1).strip()
 
-        if summary_line:
-            m = re.search(
-                r"Market description:(.*?)(Underlying metric \(URL\):|Interest rating:)",
-                summary_line
-            )
-            if m:
-                description = m.group(1).strip()
-            m2 = re.search(r"https?://[^\s]+", summary_line)
-            if m2:
-                url = m2.group(0)
+        metric_match = re.search(r"<underlying metric>(.*?)</underlying metric>", generated_text, re.DOTALL)
+        if metric_match:
+            underlying_metric = metric_match.group(1).strip()
+
+        url_match = re.search(r"<url>(.*?)</url>", generated_text, re.DOTALL)
+        if url_match:
+            url = url_match.group(1).strip()
+
+        description_match = re.search(r"<description>(.*?)</description>", generated_text, re.DOTALL)
+        if description_match:
+            description = description_match.group(1).strip()
+
+        score_match = re.search(r"<score>(.*?)</score>", generated_text, re.DOTALL)
+        if score_match:
+            score = score_match.group(1).strip()
+
+        reason_match = re.search(r"<reason>(.*?)</reason>", generated_text, re.DOTALL)
+        if reason_match:
+            reason = reason_match.group(1).strip()
 
         return jsonify({
             "generated_text": generated_text,
+            "title": title,
+            "underlying_metric": underlying_metric,
+            "url": url,
             "description": description,
-            "url": url
+            "score": score,
+            "reason": reason
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 500

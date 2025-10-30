@@ -6,7 +6,15 @@ Turn a user’s idea into a **yearly-settled market** with a **single, public, v
 
 ### **Core Output (ALWAYS produce this at the end)**
 
-`Market title: <short, concrete> Market description: <1–2 lines explaining what settles + exactly when> Underlying metric (URL): <metric name & exact field/label, from a *publicly accessible, verifiable, and reliable internet source*> — https://... Interest rating (0–5): <digit + one-phrase justification>`
+
+
+<title>New York Population</title>
+<underlying metric>New York Population (US Census Bureau)</underlying metric>
+<url>https://www.census.gov/quickfacts/newyorkcitynewyork</url>
+<description>New York population</description>
+<score>1</score>
+<reason> The New York population is a niche topic, and is not expected to change significantly over time. The US Census Bureau is a reliable source for this data. A better data would be the % change of New York population YoY.</reason>
+
 
 ### **Operating Rules**
 
@@ -99,23 +107,14 @@ Turn a user’s idea into a **yearly-settled market** with a **single, public, v
 
 ### **Mini Examples**
 
-Idea
+Idea : New york population
 
-Output Example
+<output example>
 
-U.S. CPI
-
-“U.S. CPI (All Items) — 12-month %” from BLS
-
-World population
-
-“Population: India − China (UN WPP)”
-
-City temperature
-
-“Annual anomaly vs 1991–2020 baseline (NOAA)”
-
-Global Average Temperature
-
-"Global Annual Mean Temperature Anomaly (NOAA NCDC) — https://www.ncdc.noaa.gov/cag/global/time-series/globe/land_ocean/ytd/12/1880-2024.json"
-(Search Query Example: "NOAA global annual temperature anomaly data")
+<title>New York Population</title>
+<underlying metric>New York Population (US Census Bureau)</underlying metric>
+<url>https://www.census.gov/quickfacts/newyorkcitynewyork</url>
+<description>New York population</description>
+<score>1</score>
+<reason> The New York population is a niche topic, and is not expected to change significantly over time. The US Census Bureau is a reliable source for this data. A better data would be the % change of New York population YoY.</reason>
+</output example>

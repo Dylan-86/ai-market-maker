@@ -19,13 +19,33 @@
     </div>
 
     <div class="output-section">
+      <strong>Title:</strong>
+      <p id="title"></p>
+    </div>
+
+    <div class="output-section">
       <strong>Description:</strong>
       <p id="description"></p>
     </div>
 
     <div class="output-section">
+      <strong>Underlying Metric:</strong>
+      <p id="underlyingMetric"></p>
+    </div>
+
+    <div class="output-section">
       <strong>URL:</strong>
       <p id="url"></p>
+    </div>
+
+    <div class="output-section">
+      <strong>Score:</strong>
+      <p id="score"></p>
+    </div>
+
+    <div class="output-section">
+      <strong>Reason:</strong>
+      <p id="reason"></p>
     </div>
   </div>
 
@@ -49,8 +69,13 @@
         }
 
         document.getElementById("generatedText").textContent = data.generated_text || "";
+        document.getElementById("title").textContent = data.title || "";
         document.getElementById("description").textContent = data.description || "";
+        document.getElementById("underlyingMetric").textContent = data.underlying_metric || "";
         document.getElementById("url").textContent = data.url || "";
+        document.getElementById("score").textContent = data.score || "";
+        document.getElementById("reason").textContent = data.reason || "";
+
       } catch (e) {
         console.error(e);
         alert("Network error");
