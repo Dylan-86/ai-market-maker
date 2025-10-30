@@ -103,6 +103,8 @@ Now you're ready to start the application!
 
     Your backend server is now running at `http://localhost:5000`.
 2.  **Open the Frontend:**
-    Navigate to the project folder in your file explorer and open the `index.html` file in your web browser.
+    Open directly http://127.0.0.1:5000 in your web browser.
 
 You can now enter an idea into the input box and click "Generate" to get a response from the AI!
+
+NOTE: The Generate button right now does not trigger any loader or any other visual feedback. Wait a few seconds to see the results (up to 30 seconds, usually).
