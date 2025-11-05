@@ -11,10 +11,15 @@
 
     <label for="userInput">Enter your idea:</label><br>
     <input type="text" id="userInput" name="userInput"><br><br>
-    <button id="btnGenerate">Generate</button><br><br>
+    <button id="btnGenerate">Send Message</button><br><br>
+
+    <div class="chat-history-section">
+      <strong>Chat History:</strong>
+      <div id="chatHistory"></div>
+    </div>
 
     <div class="output-section">
-      <strong>Generated Text:</strong>
+      <strong>Last Generated Text:</strong>
       <pre id="generatedText"></pre>
     </div>
 
@@ -55,7 +60,7 @@
       if (!userInput) return;
 
       try {
-        const res = await fetch("/generate_market", {
+        const res = await fetch("/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ user_input: userInput })
@@ -68,6 +73,17 @@
           return;
         }
 
+        // Display chat history
+        const chatHistoryDiv = document.getElementById("chatHistory");
+        chatHistoryDiv.innerHTML = ""; // Clear previous history
+        if (data.chat_history) {
+          data.chat_history.forEach(message => {
+            const p = document.createElement("p");
+            p.textContent = `${message.role}: ${message.text}`;
+            chatHistoryDiv.appendChild(p);
+          });
+        }
+
         document.getElementById("generatedText").textContent = data.generated_text || "";
         document.getElementById("title").textContent = data.title || "";
         document.getElementById("description").textContent = data.description || "";
@@ -75,6 +91,8 @@
         document.getElementById("url").textContent = data.url || "";
         document.getElementById("score").textContent = data.score || "";
         document.getElementById("reason").textContent = data.reason || "";
+
+        document.getElementById("userInput").value = ""; // Clear input after sending
 
       } catch (e) {
         console.error(e);

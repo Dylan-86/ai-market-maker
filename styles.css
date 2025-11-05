@@ -101,7 +101,8 @@ button:active {
 }
 
 /* Output Sections */
-.output-section {
+.output-section,
+.chat-history-section {
     margin-top: 25px;
     padding: 25px; /* Increased padding */
     background-color: var(--light-gray);
@@ -109,7 +110,8 @@ button:active {
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle inner shadow */
 }
 
-.output-section strong {
+.output-section strong,
+.chat-history-section strong {
     color: var(--primary-color);
     display: block;
     margin-bottom: 10px; /* Increased margin */
@@ -120,6 +122,24 @@ button:active {
     margin-bottom: 10px; /* Adjusted margin */
     line-height: 1.6;
     font-size: 1rem;
+}
+
+.chat-history-section #chatHistory p {
+    background-color: var(--white);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    border: 1px solid var(--light-gray);
+}
+
+.chat-history-section #chatHistory p:nth-child(odd) { /* User messages */
+    background-color: #e6f2ff; /* Light blue for user */
+    text-align: right;
+}
+
+.chat-history-section #chatHistory p:nth-child(even) { /* Model messages */
+    background-color: #f2f2f2; /* Lighter gray for model */
+    text-align: left;
 }
 
 /* Responsive Design */

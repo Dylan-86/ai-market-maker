@@ -26,27 +26,26 @@ client = genai.Client(api_key=GEMINI_API_KEY)
 def root():
     return send_from_directory(BASE_DIR, "index.html")
 
-@app.route("/generate_market", methods=["POST"])
-def generate_market():
+chat = client.chats.create(model="gemini-2.5-flash")
+
+# Load instructions once and send as initial message to the chat
+try:
+    with open(INSTR_PATH, "r", encoding="utf-8") as f:
+        instructions = f.read()
+    chat.send_message(instructions)
+except FileNotFoundError:
+    print(f"Instructions file not found at {INSTR_PATH}. Chat might not behave as expected.")
+
+@app.route("/chat", methods=["POST"])
+def chat_endpoint():
     data = request.get_json(silent=True) or {}
     user_input = (data.get("user_input") or "").strip()
     if not user_input:
         return jsonify({"error": "user_input is required"}), 400
 
     try:
-        with open(INSTR_PATH, "r", encoding="utf-8") as f:
-            instructions = f.read()
-    except FileNotFoundError:
-        return jsonify({"error": f"Instructions file not found at {INSTR_PATH}"}), 500
-
-    prompt = f"{instructions}\nUser Idea: {user_input}\n\nOutput:"
-
-    try:
-        resp = client.models.generate_content(
-            model="gemini-2.5-pro",
-            contents=prompt
-        )
-        generated_text = resp.text or ""
+        response = chat.send_message(user_input)
+        generated_text = response.text or ""
 
         # Initialize all fields to "Parsing failed"
         title = "Parsing failed: Title not found."
@@ -81,6 +80,11 @@ def generate_market():
         if reason_match:
             reason = reason_match.group(1).strip()
 
+        # Get chat history for display
+        chat_history = []
+        for message in chat.get_history():
+            chat_history.append({"role": message.role, "text": message.parts[0].text})
+
         return jsonify({
             "generated_text": generated_text,
             "title": title,
@@ -88,7 +92,8 @@ def generate_market():
             "url": url,
             "description": description,
             "score": score,
-            "reason": reason
+            "reason": reason,
+            "chat_history": chat_history # Include chat history in the response
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 500
