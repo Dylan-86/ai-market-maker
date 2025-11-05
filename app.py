@@ -1,5 +1,6 @@
 # app.py
 # /home/ddy/Apps/dexetera/app.py
+# working well
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
