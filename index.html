@@ -1,56 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>AI Market Maker</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>AI Market Maker</h1>
-
-    <label for="userInput">Enter your idea:</label><br>
-    <input type="text" id="userInput" name="userInput"><br><br>
-    <button id="btnGenerate">Send Message</button><br><br>
-
-    <div class="chat-history-section">
-      <strong>Chat History:</strong>
-      <div id="chatHistory"></div>
+  <div class="layout">
+    <!-- LEFT COLUMN: Chat -->
+    <div class="chat-column">
+      <h1>AI Market Maker</h1>
+      <div class="chat-box" id="chatHistory"></div>
+      <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type your question...">
+        <button id="btnGenerate">Send</button>
+      </div>
     </div>
 
-    <div class="output-section">
-      <strong>Last Generated Text:</strong>
-      <pre id="generatedText"></pre>
-    </div>
-
-    <div class="output-section">
-      <strong>Title:</strong>
-      <p id="title"></p>
-    </div>
-
-    <div class="output-section">
-      <strong>Description:</strong>
-      <p id="description"></p>
-    </div>
-
-    <div class="output-section">
-      <strong>Underlying Metric:</strong>
-      <p id="underlyingMetric"></p>
-    </div>
-
-    <div class="output-section">
-      <strong>URL:</strong>
-      <p id="url"></p>
-    </div>
-
-    <div class="output-section">
-      <strong>Score:</strong>
-      <p id="score"></p>
-    </div>
-
-    <div class="output-section">
-      <strong>Reason:</strong>
-      <p id="reason"></p>
+    <!-- RIGHT COLUMN: Parsed Data -->
+    <div class="data-column">
+      <h2>Parsed Output</h2>
+      <div class="parsed-data">
+        <div><strong>Title:</strong><p id="title"></p></div>
+        <div><strong>Description:</strong><p id="description"></p></div>
+        <div><strong>Underlying Metric:</strong><p id="underlyingMetric"></p></div>
+        <div><strong>URL:</strong><p id="url"></p></div>
+        <div><strong>Score:</strong><p id="score"></p></div>
+        <div><strong>Reason:</strong><p id="reason"></p></div>
+      </div>
     </div>
   </div>
 
@@ -65,26 +42,21 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ user_input: userInput })
         });
+
         const data = await res.json();
+        if (!res.ok) throw new Error(data.error || "Server error");
 
-        if (!res.ok) {
-          console.error(data);
-          alert(data.error || "Server error");
-          return;
-        }
-
-        // Display chat history
         const chatHistoryDiv = document.getElementById("chatHistory");
-        chatHistoryDiv.innerHTML = ""; // Clear previous history
-        if (data.chat_history) {
-          data.chat_history.forEach(message => {
-            const p = document.createElement("p");
-            p.textContent = `${message.role}: ${message.text}`;
-            chatHistoryDiv.appendChild(p);
-          });
-        }
+        const userMsg = document.createElement("div");
+        userMsg.className = "message user";
+        userMsg.textContent = userInput;
+        chatHistoryDiv.appendChild(userMsg);
 
-        document.getElementById("generatedText").textContent = data.generated_text || "";
+        const aiMsg = document.createElement("div");
+        aiMsg.className = "message ai";
+        aiMsg.textContent = data.generated_text || "No response.";
+        chatHistoryDiv.appendChild(aiMsg);
+
         document.getElementById("title").textContent = data.title || "";
         document.getElementById("description").textContent = data.description || "";
         document.getElementById("underlyingMetric").textContent = data.underlying_metric || "";
@@ -92,15 +64,19 @@
         document.getElementById("score").textContent = data.score || "";
         document.getElementById("reason").textContent = data.reason || "";
 
-        document.getElementById("userInput").value = ""; // Clear input after sending
+        chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
+        document.getElementById("userInput").value = "";
 
-      } catch (e) {
-        console.error(e);
+      } catch (err) {
+        console.error(err);
         alert("Network error");
       }
     }
 
     document.getElementById("btnGenerate").addEventListener("click", getAIResponse);
+    document.getElementById("userInput").addEventListener("keypress", e => {
+      if (e.key === "Enter") getAIResponse();
+    });
   </script>
 </body>
 </html>
