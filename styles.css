@@ -31,7 +31,29 @@
     box-shadow: var(--box-shadow);
     padding: 20px;
   }
+
+  .chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
   
+  .new-chat-button {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .new-chat-button:hover {
+    background-color: #2e8b4e; /* A slightly darker shade of secondary-color */
+  }
+
   .chat-box {
     flex: 1;
     overflow-y: auto;

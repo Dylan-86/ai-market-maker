@@ -9,7 +9,10 @@
   <div class="layout">
     <!-- LEFT: CHAT -->
     <div class="chat-column">
-      <h1>AI Market Maker</h1>
+      <div class="chat-header">
+        <h1>AI Market Maker</h1>
+        <button id="newChatBtn" class="new-chat-button">+ New Chat</button>
+      </div>
 
       <div class="chat-box" id="chatHistory" aria-live="polite"></div>
 
@@ -122,6 +125,22 @@
     }
 
     formEl.addEventListener("submit", handleSubmit);
+
+    const newChatBtn = document.getElementById("newChatBtn");
+
+    function resetChat() {
+      chatBox.innerHTML = ""; // Clear chat history
+      inputEl.value = ""; // Clear user input
+      document.getElementById("title").textContent = "";
+      document.getElementById("description").textContent = "";
+      document.getElementById("underlyingMetric").textContent = "";
+      document.getElementById("url").textContent = "";
+      document.getElementById("score").textContent = "";
+      document.getElementById("reason").textContent = "";
+      inputEl.focus(); // Focus on the input field
+    }
+
+    newChatBtn.addEventListener("click", resetChat);
   </script>
 </body>
 </html>
