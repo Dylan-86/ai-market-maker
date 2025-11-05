@@ -25,6 +25,7 @@
         />
         <button id="btnGenerate" type="submit">Send</button>
       </form>
+      <div id="loader" class="loader" style="display: none;"></div>
     </div>
 
     <!-- RIGHT: PARSED DATA -->
@@ -46,6 +47,7 @@
     const inputEl = document.getElementById("userInput");
     const formEl = document.getElementById("chatForm");
     const sendBtn = document.getElementById("btnGenerate");
+    const loader = document.getElementById("loader");
 
     let isSending = false;
 
@@ -66,6 +68,7 @@
 
       isSending = true;
       sendBtn.disabled = true;
+      loader.style.display = "block";
 
       appendBubble(text, "user");
 
@@ -94,6 +97,7 @@
         inputEl.focus();
         isSending = false;
         sendBtn.disabled = false;
+        loader.style.display = "none";
       }
     }
 
