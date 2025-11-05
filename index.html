@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>AI Market Maker</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v3" />
 </head>
 <body>
   <div class="layout">
-    <!-- LEFT COLUMN: Chat -->
+    <!-- LEFT: CHAT -->
     <div class="chat-column">
       <h1>AI Market Maker</h1>
-      <div class="chat-box" id="chatHistory"></div>
-      <div class="chat-input">
-        <input type="text" id="userInput" placeholder="Type your question...">
-        <button id="btnGenerate">Send</button>
-      </div>
+
+      <div class="chat-box" id="chatHistory" aria-live="polite"></div>
+
+      <!-- Use a real form; submit handles Enter and click uniformly -->
+      <form id="chatForm" class="chat-input" autocomplete="off">
+        <input
+          id="userInput"
+          name="userInput"
+          type="text"
+          placeholder="Type your question…"
+          aria-label="Your message"
+          required
+        />
+        <button id="btnGenerate" type="submit">Send</button>
+      </form>
     </div>
 
-    <!-- RIGHT COLUMN: Parsed Data -->
-    <div class="data-column">
+    <!-- RIGHT: PARSED DATA -->
+    <aside class="data-column">
       <h2>Parsed Output</h2>
       <div class="parsed-data">
         <div><strong>Title:</strong><p id="title"></p></div>
@@ -28,34 +38,47 @@
         <div><strong>Score:</strong><p id="score"></p></div>
         <div><strong>Reason:</strong><p id="reason"></p></div>
       </div>
-    </div>
+    </aside>
   </div>
 
   <script>
-    async function getAIResponse() {
-      const userInput = document.getElementById("userInput").value.trim();
-      if (!userInput) return;
+    const chatBox = document.getElementById("chatHistory");
+    const inputEl = document.getElementById("userInput");
+    const formEl = document.getElementById("chatForm");
+    const sendBtn = document.getElementById("btnGenerate");
+
+    let isSending = false;
+
+    function appendBubble(text, who) {
+      const div = document.createElement("div");
+      div.className = `message ${who}`;
+      div.textContent = text;
+      chatBox.appendChild(div);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      if (isSending) return;
+
+      const text = inputEl.value.trim();
+      if (!text) return;
+
+      isSending = true;
+      sendBtn.disabled = true;
+
+      appendBubble(text, "user");
 
       try {
         const res = await fetch("/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ user_input: userInput })
+          body: JSON.stringify({ user_input: text }),
         });
-
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Server error");
 
-        const chatHistoryDiv = document.getElementById("chatHistory");
-        const userMsg = document.createElement("div");
-        userMsg.className = "message user";
-        userMsg.textContent = userInput;
-        chatHistoryDiv.appendChild(userMsg);
-
-        const aiMsg = document.createElement("div");
-        aiMsg.className = "message ai";
-        aiMsg.textContent = data.generated_text || "No response.";
-        chatHistoryDiv.appendChild(aiMsg);
+        appendBubble(data.generated_text || "No response.", "ai");
 
         document.getElementById("title").textContent = data.title || "";
         document.getElementById("description").textContent = data.description || "";
@@ -63,20 +86,18 @@
         document.getElementById("url").textContent = data.url || "";
         document.getElementById("score").textContent = data.score || "";
         document.getElementById("reason").textContent = data.reason || "";
-
-        chatHistoryDiv.scrollTop = chatHistoryDiv.scrollHeight;
-        document.getElementById("userInput").value = "";
-
       } catch (err) {
+        appendBubble("Error: " + err.message, "ai");
         console.error(err);
-        alert("Network error");
+      } finally {
+        inputEl.value = "";
+        inputEl.focus();
+        isSending = false;
+        sendBtn.disabled = false;
       }
     }
 
-    document.getElementById("btnGenerate").addEventListener("click", getAIResponse);
-    document.getElementById("userInput").addEventListener("keypress", e => {
-      if (e.key === "Enter") getAIResponse();
-    });
+    formEl.addEventListener("submit", handleSubmit);
   </script>
 </body>
 </html>
