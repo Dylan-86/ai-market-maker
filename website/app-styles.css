@@ -91,7 +91,7 @@
       width: 34px;
       height: 34px;
       border-radius: 999px;
-      background: conic-gradient(from 180deg, #22c55e, #22d3ee, #4f46e5, #22c55e);
+      /** background: conic-gradient(from 180deg, #22c55e, #22d3ee, #4f46e5, #22c55e); **/
       display: flex;
       align-items: center;
       justify-content: center;
@@ -99,10 +99,10 @@
       flex-shrink: 0;
     }
 
-    .brand-mark span {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #020617;
+    .brand-mark img {
+      width: 24px; /* Adjust size as needed */
+      height: 24px; /* Adjust size as needed */
+      display: block;
     }
 
     .brand-title {
