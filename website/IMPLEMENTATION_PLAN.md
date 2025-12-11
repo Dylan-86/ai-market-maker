@@ -1,26 +1,48 @@
-# Implementation Plan: Invert Mobile Order of Hero Elements
+# Implementation Plan: Add Hottest Markets Section
 
 ## Objective
-On mobile viewports, the `aside.hero-visual` currently appears before `div.hero-copy`. The goal is to invert this order so that `div.hero-copy` appears first on mobile.
+Add a "Hottest Markets" section to the homepage that displays 3-4 dummy trading markets. Each market card should show a "Launch App" or "Connect Wallet" button on hover.
 
 ## Analysis
-1. The current CSS applies `order: -1` to `.hero-visual` at the `900px` breakpoint, which causes it to appear first.
-2. The `.hero-copy` element does not have an explicit `order` property, so it defaults to `0`.
-3. To invert the order, we can either:
-   - Remove the `order: -1` from `.hero-visual`, or
-   - Set `order: 1` on `.hero-visual` and `order: 0` on `.hero-copy` (explicitly)
+1. **Location**: The new section should be placed after the "Live protocol metrics" section (`#metrics`) and before the "Dexetera: The Future of Decentralized Trading" section (`#comparison`).
 
-## Solution
-Remove the `order: -1` property from `.hero-visual` in the `@media (max-width: 900px)` media query. This will allow the natural DOM order to take effect, where `.hero-copy` appears before `.hero-visual`.
+2. **Structure**:
+   - Section header with title and description (similar to existing sections)
+   - Grid layout for market cards (similar to `.value-grid` but with 4 columns)
+   - Each card should contain market information and a hover action button
+
+3. **Styling**:
+   - Reuse existing `.card` styles for consistency
+   - Add new styles for market-specific elements (price, change percentage)
+   - Create hover effects for the action button
+
+4. **Content**:
+   - 4 dummy markets with realistic names, prices, and 24h changes
+   - Mix of positive and negative changes for visual variety
 
 ## Implementation Steps
-1. Locate the `@media (max-width: 900px)` media query in `styles.css`.
-2. Remove the line `order: -1;` from the `.hero-visual` rule.
-3. Verify the change by checking the mobile layout.
+
+### HTML Changes
+1. Add new section after `#metrics` section
+2. Create section header with title and description
+3. Create grid container for market cards
+4. Add 4 market cards with:
+   - Market name
+   - Current price
+   - 24h change percentage
+   - Hover action button
+
+### CSS Changes
+1. Add new styles for market grid (4 columns)
+2. Add styles for market price and change indicators
+3. Add styles for hover action button
+4. Ensure responsive design (stack cards on mobile)
 
 ## Verification
-- Test the layout on mobile viewports to ensure `.hero-copy` appears before `.hero-visual`.
-- Ensure the change does not affect desktop layouts.
+1. Check desktop layout for proper spacing and alignment
+2. Check mobile layout for responsive behavior
+3. Verify hover effects work correctly
+4. Ensure visual consistency with existing design system
 
 ## Confidence Level
-10/10 - This is a straightforward CSS change with predictable results.
+9/10 - The implementation reuses existing patterns and styles, making it predictable and consistent with the current design.
