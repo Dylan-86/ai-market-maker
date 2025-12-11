@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dexetera App – Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="app-styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-left">
+          <div class="brand-mark"><span>D</span></div>
+          <div class="brand-title">Dexetera</div>
+        </div>
+        <span class="network-pill">Arbitrum · Mainnet</span>
+      </div>
+
+      <div>
+        <div class="nav-section-label">Trading</div>
+        <ul class="nav-list">
+          <li class="nav-item active">
+            <span><span class="nav-dot"></span>Overview</span>
+            <span class="nav-badge">Home</span>
+          </li>
+          <li class="nav-item">
+            <span><span class="nav-dot"></span>Markets</span>
+          </li>
+          <li class="nav-item">
+            <span><span class="nav-dot"></span>Portfolio</span>
+          </li>
+          <li class="nav-item">
+            <span><span class="nav-dot"></span>Trade</span>
+          </li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="nav-section-label">Account</div>
+        <ul class="nav-list">
+          <li class="nav-item">
+            <span><span class="nav-dot"></span>Deposits</span>
+          </li>
+          <li class="nav-item">
+            <span><span class="nav-dot"></span>History</span>
+          </li>
+          <li class="nav-item">
+            <span><span class="nav-dot"></span>Settings</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-footer">
+        <span>Protocol</span>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>All systems operational</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="top-left">
+        <div class="top-title">Overview</div>
+        <div class="top-subtitle">Session PnL, positions, and market heatmap</div>
+      </div>
+      <div class="top-right">
+        <button class="theme-toggle" aria-label="Toggle theme">
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </button>
+        <div class="top-search">
+          <input type="text" placeholder="Search markets" />
+          <span>/</span>
+        </div>
+        <div class="chip">Cross‑margin</div>
+        <button class="btn-connect">Connect wallet</button>
+        <div class="avatar"></div>
+      </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+      <!-- LEFT COLUMN -->
+      <section class="col">
+        <!-- PORTFOLIO -->
+        <article class="panel" aria-label="Portfolio summary">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Portfolio</div>
+              <div style="font-size:0.82rem;color:var(--muted);">
+                Cross‑margin account · 3 active positions
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;">
+              <span class="pill-green">+0.82% · 24h</span>
+              <span class="badge-soft">USD</span>
+            </div>
+          </div>
+          <div class="portfolio-grid">
+            <div class="kpi">
+              <div class="kpi-label">Net equity</div>
+              <div class="kpi-value">$52,194.23</div>
+              <div class="kpi-sub positive">+$426.73 · today</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Used margin</div>
+              <div class="kpi-value">$18,920.14</div>
+              <div class="kpi-sub">36% of account</div>
+            </div>
+            <div class="kpi">
+              <div class="kpi-label">Available to withdraw</div>
+              <div class="kpi-value">$31,992.11</div>
+              <div class="kpi-sub">Instant · no lockups</div>
+            </div>
+          </div>
+        </article>
+
+        <!-- FAVORITE MARKETS -->
+        <article class="panel" aria-label="Favorite markets">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Watchlist</div>
+              <div style="font-size:0.82rem;color:var(--muted);">
+                Tap a market to open the trading layout.
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.4rem;">
+              <span class="badge-soft">Perps</span>
+              <span class="badge-soft">All</span>
+            </div>
+          </div>
+          <div class="markets-header-row">
+            <span>Market</span>
+            <span>Price</span>
+            <span>24h</span>
+            <span>Volume</span>
+            <span>Position</span>
+          </div>
+          <ul class="markets-list">
+            <li class="market-row">
+              <div class="market-name">
+                <span class="market-symbol">ETH‑PERP</span>
+                <span class="market-sub">5× · USDC collateral</span>
+              </div>
+              <div class="market-price">$3,487.25</div>
+              <div class="market-change">+2.4%</div>
+              <div class="market-vol">$182M</div>
+              <div class="market-pos">Long 12.5</div>
+            </li>
+            <li class="market-row">
+              <div class="market-name">
+                <span class="market-symbol">BTC‑PERP</span>
+                <span class="market-sub">3× · USDC collateral</span>
+              </div>
+              <div class="market-price">$64,912.80</div>
+              <div class="market-change negative">‑0.9%</div>
+              <div class="market-vol">$246M</div>
+              <div class="market-pos">Flat</div>
+            </li>
+            <li class="market-row">
+              <div class="market-name">
+                <span class="market-symbol">ARB‑PERP</span>
+                <span class="market-sub">4× · USDC collateral</span>
+              </div>
+              <div class="market-price">$1.82</div>
+              <div class="market-change">+5.3%</div>
+              <div class="market-vol">$42M</div>
+              <div class="market-pos">Short 24k</div>
+            </li>
+          </ul>
+        </article>
+
+        <!-- OPEN POSITIONS -->
+        <article class="panel" aria-label="Open positions">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Open positions</div>
+              <div style="font-size:0.82rem;color:var(--muted);">
+                Live PnL, risk, and liquidation levels.
+              </div>
+            </div>
+            <span class="badge-soft">Cross‑margin</span>
+          </div>
+          <div style="overflow:auto;">
+            <table class="positions-table">
+              <thead>
+                <tr>
+                  <th>Market</th>
+                  <th>Side</th>
+                  <th>Size</th>
+                  <th>Entry</th>
+                  <th>Mark</th>
+                  <th>Unreal. PnL</th>
+                  <th>Liq.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>ETH‑PERP</td>
+                  <td><span class="tag-long">Long</span></td>
+                  <td>12.5</td>
+                  <td>3,402.10</td>
+                  <td>3,487.25</td>
+                  <td style="color:var(--accent);">+$1,065.22</td>
+                  <td>2,910.3</td>
+                </tr>
+                <tr>
+                  <td>ARB‑PERP</td>
+                  <td><span class="tag-short">Short</span></td>
+                  <td>24,000</td>
+                  <td>1.96</td>
+                  <td>1.82</td>
+                  <td style="color:var(--accent);">+$3,251.89</td>
+                  <td>2.04</td>
+                </tr>
+                <tr>
+                  <td>SOL‑PERP</td>
+                  <td><span class="tag-long">Long</span></td>
+                  <td>1,200</td>
+                  <td>142.10</td>
+                  <td>139.82</td>
+                  <td style="color:var(--danger);">‑$2,743.11</td>
+                  <td>118.20</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <!-- RIGHT COLUMN -->
+      <section class="col">
+        <!-- SELECTED MARKET -->
+        <article class="panel" aria-label="Selected market overview">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">ETH‑PERP / USDC</div>
+              <div style="font-size:0.82rem;color:var(--muted);">
+                5× max leverage · 0.01% maker · 0.06% taker
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:0.4rem;">
+              <span class="pill-blue">Isolated</span>
+              <span class="pill-green">+2.4% · 24h</span>
+            </div>
+          </div>
+          <div class="chart-area">
+            <div class="chart-line"></div>
+            <div class="chart-y">
+              <span>3,510</span>
+              <span>3,490</span>
+              <span>3,470</span>
+              <span>3,450</span>
+            </div>
+            <div class="chart-x">
+              <span>10:00</span>
+              <span>12:00</span>
+              <span>14:00</span>
+              <span>16:00</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- ORDER BOOK / RECENT ACTIVITY -->
+        <article class="panel" aria-label="Order book and recent activity">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Order book · ETH‑PERP</div>
+              <div style="font-size:0.82rem;color:var(--muted);">
+                Top 5 bids and asks by size.
+              </div>
+            </div>
+            <span class="badge-soft">10 depth levels</span>
+          </div>
+          <div class="depth-grid">
+            <div>
+              <div class="depth-col-header">
+                <span>Asks</span>
+                <span>Size</span>
+              </div>
+              <ul class="depth-list">
+                <li class="depth-item ask">
+                  <span class="depth-price">3,488.1</span>
+                  <span class="depth-size">12.4</span>
+                </li>
+                <li class="depth-item ask">
+                  <span class="depth-price">3,487.9</span>
+                  <span class="depth-size">6.9</span>
+                </li>
+                <li class="depth-item ask">
+                  <span class="depth-price">3,487.7</span>
+                  <span class="depth-size">8.2</span>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <div class="depth-col-header">
+                <span>Bids</span>
+                <span>Size</span>
+              </div>
+              <ul class="depth-list">
+                <li class="depth-item bid">
+                  <span class="depth-price">3,487.2</span>
+                  <span class="depth-size">14.1</span>
+                </li>
+                <li class="depth-item bid">
+                  <span class="depth-price">3,486.9</span>
+                  <span class="depth-size">9.7</span>
+                </li>
+                <li class="depth-item bid">
+                  <span class="depth-price">3,486.7</span>
+                  <span class="depth-size">7.3</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- RECENT ACTIVITY -->
+        <article class="panel" aria-label="Recent activity">
+          <div class="panel-header">
+            <div>
+              <div class="panel-title">Recent activity</div>
+              <div style="font-size:0.82rem;color:var(--muted);">
+                Latest fills, liquidations, and funding events.
+              </div>
+            </div>
+            <span class="badge-soft">Last 30 min</span>
+          </div>
+          <ul class="activity-list">
+            <li class="activity-item">
+              <div class="activity-main">
+                <span class="activity-label">Filled limit buy · ETH‑PERP</span>
+                <span class="activity-meta">3.2 @ 3,485.7 · Maker rebate</span>
+              </div>
+              <span class="activity-time">10:42</span>
+            </li>
+            <li class="activity-item">
+              <div class="activity-main">
+                <span class="activity-label">Funding payment received</span>
+                <span class="activity-meta">+12.48 USDC · Long ETH‑PERP</span>
+              </div>
+              <span class="activity-time">10:38</span>
+            </li>
+            <li class="activity-item">
+              <div class="activity-main">
+                <span class="activity-label">Partial TP · ARB‑PERP</span>
+                <span class="activity-meta">Closed 6,000 @ 1.80 · +$720</span>
+              </div>
+              <span class="activity-time">10:31</span>
+            </li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const themeToggle = document.querySelector('.theme-toggle');
+    const root = document.documentElement;
+    
+    // Check for saved theme preference or default to 'dark'
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    root.setAttribute('data-theme', currentTheme);
+    
+    themeToggle.addEventListener('click', () => {
+      const theme = root.getAttribute('data-theme');
+      const newTheme = theme === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    });
+  </script>
+</body>
+</html>
