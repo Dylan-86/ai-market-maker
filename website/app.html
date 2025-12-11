@@ -15,18 +15,21 @@
           <div class="brand-mark"><span>D</span></div>
           <div class="brand-title">Dexetera</div>
         </div>
-        <span class="network-pill">Arbitrum · Mainnet</span>
+        <span class="network-pill">Arbitrum</span>
       </div>
 
       <div>
         <div class="nav-section-label">Trading</div>
         <ul class="nav-list">
           <li class="nav-item active">
-            <span><span class="nav-dot"></span>Overview</span>
+            <span><span class="nav-dot"></span>Dashboard</span>
             <span class="nav-badge">Home</span>
           </li>
           <li class="nav-item">
             <span><span class="nav-dot"></span>Markets</span>
+          </li>
+          <li class="nav-item">
+            <span><span class="nav-dot"></span>Create Market</span>
           </li>
           <li class="nav-item">
             <span><span class="nav-dot"></span>Portfolio</span>
@@ -53,7 +56,7 @@
       </div>
 
       <div class="sidebar-footer">
-        <span>Protocol</span>
+        <span>Protocol Status</span>
         <div class="status-pill">
           <span class="status-dot"></span>
           <span>All systems operational</span>
@@ -64,8 +67,8 @@
     <!-- TOPBAR -->
     <header class="topbar">
       <div class="top-left">
-        <div class="top-title">Overview</div>
-        <div class="top-subtitle">Session PnL, positions, and market heatmap</div>
+        <div class="top-title">Dashboard</div>
+        <div class="top-subtitle">Your session PnL, positions, and market overview</div>
       </div>
       <div class="top-right">
         <button class="theme-toggle" aria-label="Toggle theme">
@@ -85,11 +88,18 @@
           </svg>
         </button>
         <div class="top-search">
-          <input type="text" placeholder="Search markets" />
+          <input type="text" placeholder="Search markets or custom contracts" />
           <span>/</span>
         </div>
         <div class="chip">Cross‑margin</div>
-        <button class="btn-connect">Connect wallet</button>
+        <div class="wallet-display">
+          <div class="wallet-info">
+            <span class="wallet-address">0xAbC...123</span>
+            <span class="wallet-balance">1,234.56 USDC</span>
+          </div>
+          <button class="btn-ghost">Deposit</button>
+          <button class="btn-ghost">Withdraw</button>
+        </div>
         <div class="avatar"></div>
       </div>
     </header>
@@ -132,15 +142,16 @@
         </article>
 
         <!-- FAVORITE MARKETS -->
-        <article class="panel" aria-label="Favorite markets">
+        <article class="panel" aria-label="Tradeable markets">
           <div class="panel-header">
             <div>
-              <div class="panel-title">Watchlist</div>
+              <div class="panel-title">Explore Markets</div>
               <div style="font-size:0.82rem;color:var(--muted);">
-                Tap a market to open the trading layout.
+                Discover and trade any verifiable market or create your own.
               </div>
             </div>
             <div style="display:flex;align-items:center;gap:0.4rem;">
+              <span class="badge-soft">Custom</span>
               <span class="badge-soft">Perps</span>
               <span class="badge-soft">All</span>
             </div>
@@ -148,9 +159,9 @@
           <div class="markets-header-row">
             <span>Market</span>
             <span>Price</span>
-            <span>24h</span>
+            <span>24h Change</span>
             <span>Volume</span>
-            <span>Position</span>
+            <span>Your Position</span>
           </div>
           <ul class="markets-list">
             <li class="market-row">
@@ -183,6 +194,16 @@
               <div class="market-vol">$42M</div>
               <div class="market-pos">Short 24k</div>
             </li>
+            <li class="market-row">
+              <div class="market-name">
+                <span class="market-symbol">MIAMIHOME‑PERP</span>
+                <span class="market-sub">Avg. Price · 1Y Future</span>
+              </div>
+              <div class="market-price">$620,000</div>
+              <div class="market-change">+1.2%</div>
+              <div class="market-vol">$5M</div>
+              <div class="market-pos">Flat</div>
+            </li>
           </ul>
         </article>
 
@@ -192,7 +213,7 @@
             <div>
               <div class="panel-title">Open positions</div>
               <div style="font-size:0.82rem;color:var(--muted);">
-                Live PnL, risk, and liquidation levels.
+                Live PnL, risk, and liquidation levels. Gas-free execution.
               </div>
             </div>
             <span class="badge-soft">Cross‑margin</span>
@@ -237,6 +258,15 @@
                   <td>139.82</td>
                   <td style="color:var(--danger);">‑$2,743.11</td>
                   <td>118.20</td>
+                </tr>
+                <tr>
+                  <td>MIAMIHOME‑PERP</td>
+                  <td><span class="tag-long">Long</span></td>
+                  <td>1</td>
+                  <td>615,000</td>
+                  <td>620,000</td>
+                  <td style="color:var(--accent);">+$5,000</td>
+                  <td>580,000</td>
                 </tr>
               </tbody>
             </table>
