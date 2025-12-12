@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+    /* Reset & Base */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: #000; display: flex; align-items: center; justify-content: center; height: 100vh; color: #fff; }
+
+    /* Component Container */
+    .modal-card {
+        background: #0f1114; /* Deep dark bg similar to screenshot */
+        width: 400px;
+        border-radius: 16px;
+        padding: 24px;
+        border: 1px solid #2a2d33;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        position: relative;
+    }
+
+    /* Header */
+    .header {
+        text-align: center;
+        margin-bottom: 24px;
+        position: relative;
+    }
+    .header h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+    .header .close-btn {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        background: #1e2126;
+        border: none;
+        color: #888;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: 0.2s;
+    }
+    .header .close-btn:hover { background: #2a2d33; color: #fff; }
+
+    /* Status Stack (The Linear State Pattern) */
+    .status-stack {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .status-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px;
+        border-radius: 12px;
+        background: #16191d;
+        border: 1px solid #2a2d33;
+        transition: 0.2s;
+    }
+
+    /* State: Done (Wallet) */
+    .status-row.done {
+        opacity: 0.7; /* Dimmed slightly to de-emphasize */
+        border-color: #1f3625;
+        background: #0f1512;
+    }
+    .status-row.done .icon { color: #2ecc71; } /* Green Check */
+    
+    /* State: Pending (Session) */
+    .status-row.pending {
+        background: #1a1d21;
+        border: 1px solid #3d424a; /* Highlight border */
+        box-shadow: 0 0 0 1px #3d424a;
+    }
+    .status-row.pending .icon { 
+        color: #888; 
+        border: 2px solid #555;
+        width: 20px; 
+        height: 20px; 
+        border-radius: 50%;
+    }
+
+    /* Row Content Layout */
+    .row-left { display: flex; align-items: center; gap: 12px; }
+    .label-main { font-size: 14px; font-weight: 500; color: #eee; }
+    .label-sub { font-size: 13px; color: #666; font-family: monospace; }
+    .status-tag { 
+        font-size: 12px; 
+        padding: 4px 8px; 
+        border-radius: 6px; 
+        font-weight: 500;
+    }
+    .tag-green { background: #132f1b; color: #2ecc71; }
+    .tag-grey { background: #2a2d33; color: #888; }
+
+    /* Button */
+    .action-btn {
+        width: 100%;
+        padding: 16px;
+        border-radius: 12px;
+        border: none;
+        background: #1a8f48; /* Base Green */
+        background: linear-gradient(180deg, #22a053 0%, #17803d 100%);
+        color: white;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+        box-shadow: 0 4px 12px rgba(34, 160, 83, 0.2);
+    }
+    .action-btn:hover {
+        filter: brightness(1.1);
+        transform: translateY(-1px);
+    }
+    .action-btn:active { transform: translateY(0); }
+
+    /* Footer */
+    .footer {
+        text-align: center;
+        margin-top: 16px;
+        font-size: 11px;
+        color: #444;
+    }
+    .footer a { color: #555; text-decoration: none; border-bottom: 1px dotted #555; }
+
+</style>
+</head>
+<body>
+
+<div class="modal-card">
+    <!-- Header -->
+    <div class="header">
+        <button class="close-btn">&times;</button>
+        <div style="margin-bottom: 8px;">
+            <!-- Simple logo placeholder -->
+            <div style="width:32px; height:32px; background:#fff; border-radius:50%; margin:0 auto; display:flex; align-items:center; justify-content:center;">
+                <span style="color:#000; font-weight:bold; font-size:16px;">D</span>
+            </div>
+        </div>
+        <h2>Activate Gasless Mode</h2>
+    </div>
+
+    <!-- Status Stack -->
+    <div class="status-stack">
+        
+        <!-- Step 1: Wallet (Done) -->
+        <div class="status-row done">
+            <div class="row-left">
+                <!-- SVG Checkmark -->
+                <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <div>
+                    <div class="label-main">Wallet Connected</div>
+                </div>
+            </div>
+            <div class="label-sub">0x9d...41d0</div>
+        </div>
+
+        <!-- Step 2: Session (Pending) -->
+        <div class="status-row pending">
+            <div class="row-left">
+                <!-- Empty Circle for pending -->
+                <div class="icon"></div> 
+                <div>
+                    <div class="label-main">Trading Session</div>
+                </div>
+            </div>
+            <div class="status-tag tag-grey">Inactive</div>
+        </div>
+
+    </div>
+
+    <!-- Primary Action -->
+    <button class="action-btn">
+        Sign to Activate
+    </button>
+
+    <!-- Footer -->
+    <div class="footer">
+        By signing, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>
+    </div>
+
+</div>
+
+</body>
+</html>

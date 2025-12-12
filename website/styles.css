@@ -534,7 +534,7 @@
 
     .section {
       max-width: 1280px;
-      margin: 0 auto 4rem;
+      margin: 8rem auto 4rem;
       padding: 0 2rem;
     }
 
@@ -547,7 +547,7 @@
     }
 
     .section-title {
-      font-size: 1.3rem;
+      font-size: 2rem;
       font-weight: 600;
     }
 
